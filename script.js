@@ -1,52 +1,59 @@
-/* ========================================
-   Mr.Q Photography — 主腳本
-   ======================================== */
+/* ==========================================================================
+   Mr.Q Photography | 視界攝影 — 主腳本 (v3)
+   ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    // ---------- 載入動畫 ----------
+    // ---------- 1. 載入動畫 Loader ----------
     const loader = document.getElementById('loader');
     window.addEventListener('load', () => {
         setTimeout(() => {
             loader.classList.add('hidden');
-        }, 1800);
+        }, 1200);
     });
-    // fallback
-    setTimeout(() => loader.classList.add('hidden'), 3000);
+    // Fallback 最多 2.5 秒關閉
+    setTimeout(() => {
+        if (!loader.classList.contains('hidden')) {
+            loader.classList.add('hidden');
+        }
+    }, 2500);
 
-    // ---------- 導覽列滾動效果 ----------
+
+    // ---------- 2. 導覽列滾動效果 & 活躍標記 ----------
     const navbar = document.getElementById('navbar');
-    const sections = document.querySelectorAll('.section');
+    const sections = document.querySelectorAll('header, section');
+    const navLinks = document.querySelectorAll('.nav-links a');
 
-    function onScroll() {
-        // 背景變色
-        if (window.scrollY > 80) {
+    function handleNavbarScroll() {
+        if (window.scrollY > 60) {
             navbar.classList.add('scrolled');
         } else {
             navbar.classList.remove('scrolled');
         }
 
-        // active link
-        const navLinks = document.querySelectorAll('.nav-links a');
-        let current = '';
+        // Active link tracking
+        let currentSectionId = '';
         sections.forEach(sec => {
-            const top = sec.offsetTop - 120;
-            if (window.scrollY >= top) {
-                current = sec.getAttribute('id');
+            const secTop = sec.offsetTop - 140;
+            if (window.scrollY >= secTop) {
+                currentSectionId = sec.getAttribute('id');
             }
         });
+
         navLinks.forEach(link => {
             link.classList.remove('active');
-            if (link.getAttribute('href') === `#${current}`) {
+            const href = link.getAttribute('href');
+            if (href === `#${currentSectionId}`) {
                 link.classList.add('active');
             }
         });
     }
 
-    window.addEventListener('scroll', onScroll);
-    onScroll();
+    window.addEventListener('scroll', handleNavbarScroll);
+    handleNavbarScroll();
 
-    // ---------- 漢堡選單 ----------
+
+    // ---------- 3. 手機版漢堡選單 ----------
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobileMenu');
 
@@ -64,9 +71,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // ---------- Scroll Reveal 動畫 ----------
-    const revealElements = document.querySelectorAll('.reveal-left, .reveal-right, .reveal-up');
 
+    // ---------- 4. 滾動淡入動畫 (Intersection Observer) ----------
+    const revealElements = document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right');
     const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -74,43 +81,34 @@ document.addEventListener('DOMContentLoaded', () => {
                 revealObserver.unobserve(entry.target);
             }
         });
-    }, { threshold: 0.15 });
+    }, {
+        threshold: 0.12,
+        rootMargin: '0px 0px -40px 0px'
+    });
 
     revealElements.forEach(el => revealObserver.observe(el));
 
-    // ---------- 作品集篩選 ----------
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    const portfolioItems = document.querySelectorAll('.portfolio-item');
 
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            filterBtns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-
-            const filter = btn.dataset.filter;
-
-            portfolioItems.forEach(item => {
-                if (filter === 'all' || item.dataset.category === filter) {
-                    item.classList.remove('hidden');
-                    item.style.animation = 'fadeUp 0.5s ease forwards';
-                } else {
-                    item.classList.add('hidden');
-                }
-            });
-        });
-    });
-
-    // ---------- Lightbox ----------
+    // ---------- 5. Lightbox 大圖彈窗 ----------
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = lightbox.querySelector('.lightbox-img');
+    const lightboxTitle = document.getElementById('lightboxTitle');
+    const lightboxDesc = document.getElementById('lightboxDesc');
     const lightboxClose = lightbox.querySelector('.lightbox-close');
 
-    // 點擊 no-link 作品開啟 lightbox
-    document.querySelectorAll('.no-link').forEach(link => {
-        link.addEventListener('click', (e) => {
-            const img = link.querySelector('img');
-            lightboxImg.src = img.src;
-            lightboxImg.alt = img.alt;
+    // 點擊無外部 IG 連結的作品，開啟 Lightbox
+    document.querySelectorAll('.modal-trigger').forEach(trigger => {
+        trigger.addEventListener('click', (e) => {
+            e.preventDefault();
+            const src = trigger.getAttribute('data-src') || trigger.querySelector('img').src;
+            const title = trigger.getAttribute('data-title') || '';
+            const desc = trigger.getAttribute('data-desc') || '';
+
+            lightboxImg.src = src;
+            lightboxImg.alt = title;
+            lightboxTitle.textContent = title;
+            lightboxDesc.textContent = desc;
+
             lightbox.classList.add('active');
             document.body.style.overflow = 'hidden';
         });
@@ -118,7 +116,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     lightboxClose.addEventListener('click', closeLightbox);
     lightbox.addEventListener('click', (e) => {
-        if (e.target === lightbox) closeLightbox();
+        if (e.target === lightbox) {
+            closeLightbox();
+        }
     });
 
     function closeLightbox() {
@@ -126,108 +126,206 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.style.overflow = '';
     }
 
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') closeLightbox();
-    });
 
-    // ---------- 推薦輪播 ----------
-    const track = document.getElementById('testimonialTrack');
-    const dots = document.querySelectorAll('.dot');
-    let currentSlide = 0;
-    const totalSlides = dots.length;
+    // ---------- 6. PX3 榮譽證書專用彈窗 ----------
+    const awardModal = document.getElementById('awardModal');
+    const openAwardModal = document.getElementById('openAwardModal');
+    const closeAwardModal = document.getElementById('closeAwardModal');
 
-    function goToSlide(index) {
-        currentSlide = index;
-        track.style.transform = `translateX(-${index * 100}%)`;
-        dots.forEach(d => d.classList.remove('active'));
-        dots[index].classList.add('active');
+    if (openAwardModal && awardModal) {
+        openAwardModal.addEventListener('click', () => {
+            awardModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        closeAwardModal.addEventListener('click', () => {
+            awardModal.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        awardModal.addEventListener('click', (e) => {
+            if (e.target === awardModal) {
+                awardModal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
     }
 
-    dots.forEach(dot => {
-        dot.addEventListener('click', () => {
-            goToSlide(parseInt(dot.dataset.index));
+    // 按下 ESC 關閉所有彈窗
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeLightbox();
+            if (awardModal) {
+                awardModal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+    });
+
+
+    // ---------- 7. 客戶推薦類別篩選 ----------
+    const reviewTabs = document.querySelectorAll('.review-tab');
+    const reviewItems = document.querySelectorAll('.review-item');
+
+    reviewTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            reviewTabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+
+            const filterType = tab.getAttribute('data-type');
+
+            reviewItems.forEach(item => {
+                const itemType = item.getAttribute('data-type');
+                if (filterType === 'all' || itemType === filterType) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
         });
     });
 
-    // 自動播放
-    setInterval(() => {
-        goToSlide((currentSlide + 1) % totalSlides);
-    }, 6000);
 
-    // ---------- 星星評分 ----------
+    // ---------- 8. 星星評分互動 ----------
     const starRating = document.getElementById('starRating');
-    const stars = starRating.querySelectorAll('i');
-    let selectedRating = 0;
+    const stars = starRating ? starRating.querySelectorAll('i') : [];
+    let currentRating = 5;
 
     stars.forEach(star => {
         star.addEventListener('mouseenter', () => {
-            const val = parseInt(star.dataset.value);
-            stars.forEach(s => {
-                s.classList.toggle('active', parseInt(s.dataset.value) <= val);
-                s.classList.toggle('fas', parseInt(s.dataset.value) <= val);
-                s.classList.toggle('far', parseInt(s.dataset.value) > val);
-            });
+            const hoverVal = parseInt(star.getAttribute('data-value'));
+            updateStarsDisplay(hoverVal);
         });
 
         star.addEventListener('click', () => {
-            selectedRating = parseInt(star.dataset.value);
+            currentRating = parseInt(star.getAttribute('data-value'));
+            updateStarsDisplay(currentRating);
         });
     });
 
-    starRating.addEventListener('mouseleave', () => {
+    if (starRating) {
+        starRating.addEventListener('mouseleave', () => {
+            updateStarsDisplay(currentRating);
+        });
+    }
+
+    function updateStarsDisplay(val) {
         stars.forEach(s => {
-            s.classList.toggle('active', parseInt(s.dataset.value) <= selectedRating);
-            s.classList.toggle('fas', parseInt(s.dataset.value) <= selectedRating);
-            s.classList.toggle('far', parseInt(s.dataset.value) > selectedRating);
+            const sVal = parseInt(s.getAttribute('data-value'));
+            if (sVal <= val) {
+                s.classList.add('active');
+            } else {
+                s.classList.remove('active');
+            }
         });
-    });
+    }
 
-    // ---------- 表單送出 ----------
-    function showToast(message) {
+
+    // ---------- 9. 提示通知 Toast 函數 ----------
+    function showToast(message, icon = 'check-circle') {
         const toast = document.createElement('div');
         toast.className = 'toast';
-        toast.textContent = message;
+        toast.innerHTML = `<i class="fas fa-${icon}" style="color:var(--gold);"></i> <span>${message}</span>`;
         document.body.appendChild(toast);
-        requestAnimationFrame(() => toast.classList.add('show'));
+
+        requestAnimationFrame(() => {
+            toast.classList.add('show');
+        });
+
         setTimeout(() => {
             toast.classList.remove('show');
             setTimeout(() => toast.remove(), 400);
-        }, 3000);
+        }, 3600);
     }
 
-    // 推薦表單
-    document.getElementById('reviewForm').addEventListener('submit', (e) => {
-        e.preventDefault();
-        if (selectedRating === 0) {
-            showToast('請先選擇評分星數 ⭐');
-            return;
-        }
-        showToast('感謝您的推薦！🎉');
-        e.target.reset();
-        selectedRating = 0;
-        stars.forEach(s => {
-            s.classList.remove('active', 'fas');
-            s.classList.add('far');
-        });
-    });
 
-    // 諮詢表單
-    document.getElementById('contactForm').addEventListener('submit', (e) => {
-        e.preventDefault();
-        showToast('已收到您的諮詢，我們會盡快回覆！📩');
-        e.target.reset();
-    });
+    // ---------- 10. 推薦留言表單送出 ----------
+    const reviewForm = document.getElementById('reviewForm');
+    const testimonialGrid = document.getElementById('testimonialGrid');
 
-    // ---------- 平滑錨點滾動 ----------
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', (e) => {
+    if (reviewForm) {
+        reviewForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            const target = document.querySelector(anchor.getAttribute('href'));
-            if (target) {
-                const offset = navbar.offsetHeight;
-                const top = target.getBoundingClientRect().top + window.scrollY - offset;
-                window.scrollTo({ top, behavior: 'smooth' });
+            const formData = new FormData(reviewForm);
+            const name = formData.get('reviewer_name');
+            const service = formData.get('reviewer_service');
+            const message = formData.get('review_message');
+
+            // 產生星號字串
+            let starHtml = '';
+            for (let i = 0; i < currentRating; i++) {
+                starHtml += '<i class="fas fa-star"></i>';
+            }
+
+            // 動態新增評論卡片到最上方
+            const newCard = document.createElement('div');
+            newCard.className = 'testimonial-card review-item';
+            newCard.setAttribute('data-type', 'wedding');
+            newCard.innerHTML = `
+                <div class="testimonial-stars">${starHtml}</div>
+                <p class="testimonial-text">「${escapeHtml(message)}」</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar"><i class="fas fa-user"></i></div>
+                    <div>
+                        <span class="author-name">${escapeHtml(name)}</span>
+                        <span class="author-service">${escapeHtml(service)}</span>
+                    </div>
+                </div>
+            `;
+
+            testimonialGrid.insertBefore(newCard, testimonialGrid.firstChild);
+            showToast('非常感謝您的真實推薦！留言已成功送出 🎉');
+
+            reviewForm.reset();
+            currentRating = 5;
+            updateStarsDisplay(5);
+        });
+    }
+
+
+    // ---------- 11. 預約諮詢表單送出 ----------
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const formData = new FormData(contactForm);
+            const name = formData.get('name');
+            const email = formData.get('email');
+
+            showToast(`感謝 ${name}！我們已收到您的諮詢，將儘速回覆至您的信箱。📩`);
+            contactForm.reset();
+        });
+    }
+
+
+    // ---------- 12. 平滑錨點滾動 ----------
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+
+            const targetEl = document.querySelector(targetId);
+            if (targetEl) {
+                e.preventDefault();
+                const offset = navbar.offsetHeight + 10;
+                const topPos = targetEl.getBoundingClientRect().top + window.scrollY - offset;
+                window.scrollTo({
+                    top: topPos,
+                    behavior: 'smooth'
+                });
             }
         });
     });
+
+    // 輔助防 XSS
+    function escapeHtml(text) {
+        if (!text) return '';
+        return text
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    }
+
 });
