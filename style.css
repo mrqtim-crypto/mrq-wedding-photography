@@ -331,6 +331,41 @@ img {
     transform: translateY(-2px);
 }
 
+.nav-fb {
+    color: var(--text-secondary);
+    font-size: 1.25rem;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.nav-fb:hover {
+    color: #1877f2;
+    transform: translateY(-2px);
+}
+
+.badge-primary-pill {
+    display: inline-block;
+    background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
+    color: #ffffff;
+    font-size: 0.7rem;
+    padding: 2px 8px;
+    border-radius: 20px;
+    margin-left: 8px;
+    font-weight: 500;
+    vertical-align: middle;
+}
+
+.badge-primary-social {
+    display: inline-block;
+    background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
+    color: #ffffff;
+    font-size: 0.65rem;
+    padding: 1px 6px;
+    border-radius: 10px;
+    margin-left: 6px;
+}
+
 .hamburger {
     display: none;
     flex-direction: column;
