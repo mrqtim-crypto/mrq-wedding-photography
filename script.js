@@ -283,17 +283,45 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // ---------- 11. 預約諮詢表單送出 ----------
+    // ---------- 11. 預約諮詢表單送出 (直發 ken03101@hotmail.com) ----------
     const contactForm = document.getElementById('contactForm');
-    if (contactForm) {
-        contactForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const formData = new FormData(contactForm);
-            const name = formData.get('name');
-            const email = formData.get('email');
+    const submitBtn = document.getElementById('submitBtn');
 
-            showToast(`感謝 ${name}！我們已收到您的諮詢，將儘速回覆至您的信箱。📩`);
-            contactForm.reset();
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const origBtnHtml = submitBtn ? submitBtn.innerHTML : '';
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 正在傳送需求至信箱...';
+            }
+
+            const formData = new FormData(contactForm);
+
+            // 優先以 AJAX 非同步傳送至 FormSubmit.co
+            fetch('https://formsubmit.co/ajax/ken03101@hotmail.com', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json'
+                },
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = origBtnHtml;
+                }
+                const name = formData.get('name') || '客戶';
+                showToast(`🎉 感謝 ${name}！您的預約需求已直達攝影師信箱，我們將火速回覆您。您亦可加 LINE (ken03101) 即時確認！`);
+                contactForm.reset();
+            })
+            .catch(error => {
+                // 若 AJAX 遇阻，以原生 POST 提交做穩健備援
+                console.warn('AJAX submit fallback to native POST', error);
+                contactForm.submit();
+            });
         });
     }
 
