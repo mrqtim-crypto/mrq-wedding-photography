@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mrqtim-crypto.github.io/mrq-wedding-photography/sitemap.xml

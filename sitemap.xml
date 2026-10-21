@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://mrqtim-crypto.github.io/mrq-wedding-photography/</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://mrqtim-crypto.github.io/mrq-wedding-photography/images/LOGO.PNG</image:loc>
+      <image:title>Mr.Q Photography 視界攝影 LOGO</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://mrqtim-crypto.github.io/mrq-wedding-photography/images/px3-award.jpg</image:loc>
+      <image:title>法國巴黎 PX3 國際攝影大賽 榮譽獎證書</image:title>
+    </image:image>
+  </url>
+</urlset>
