@@ -1021,7 +1021,13 @@ img {
 }
 
 .card-glass-info.architectural {
-    background: linear-gradient(to top, rgba(10, 14, 18, 0.95), rgba(10, 14, 18, 0.4) 70%, transparent);
+    background: linear-gradient(
+        to top,
+        rgba(10, 14, 18, 0.95) 0%,
+        rgba(10, 14, 18, 0.72) 48%,
+        rgba(10, 14, 18, 0.18) 82%,
+        transparent 100%
+    );
 }
 
 /* --------------------------------------------------------------------------
@@ -1117,29 +1123,43 @@ img {
     transform: scale(1.03);
 }
 
-/* 圖片下方資訊毛玻璃覆蓋層 */
+/* 圖片下方資訊覆蓋層 — 永遠直接顯示，方便手機與桌機瀏覽 */
 .card-glass-info {
     position: absolute;
-    inset: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
     background: linear-gradient(
         to top,
-        rgba(10, 11, 12, 0.95) 0%,
-        rgba(10, 11, 12, 0.5) 45%,
-        rgba(10, 11, 12, 0.1) 75%,
+        rgba(8, 9, 10, 0.94) 0%,
+        rgba(8, 9, 10, 0.72) 48%,
+        rgba(8, 9, 10, 0.18) 82%,
         transparent 100%
     );
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    padding: 24px 20px;
-    opacity: 0;
-    transition: opacity 0.35s ease, transform 0.35s ease;
-    transform: translateY(8px);
+    padding: 38px 18px 16px;
+    opacity: 1; /* 永遠直接顯示 */
+    transform: none;
+    transition: var(--transition);
 }
 
 .gallery-card:hover .card-glass-info {
-    opacity: 1;
-    transform: translateY(0);
+    background: linear-gradient(
+        to top,
+        rgba(8, 9, 10, 0.98) 0%,
+        rgba(8, 9, 10, 0.82) 52%,
+        rgba(8, 9, 10, 0.28) 86%,
+        transparent 100%
+    );
+}
+
+.gallery-card:hover .card-ig-hint {
+    background: #e1306c;
+    border-color: #e1306c;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(225, 48, 108, 0.4);
 }
 
 .card-tag {
@@ -1147,7 +1167,7 @@ img {
     letter-spacing: 1px;
     font-weight: 600;
     text-transform: uppercase;
-    margin-bottom: 6px;
+    margin-bottom: 4px;
     display: block;
 }
 
@@ -1157,20 +1177,21 @@ img {
     color: #ffffff;
     font-weight: 500;
     line-height: 1.35;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
 }
 
 .card-ig-hint {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     color: #ffffff;
-    background: rgba(225, 48, 108, 0.25);
-    border: 1px solid rgba(225, 48, 108, 0.5);
+    background: rgba(225, 48, 108, 0.3);
+    border: 1px solid rgba(225, 48, 108, 0.6);
     padding: 4px 12px;
     border-radius: 20px;
     width: fit-content;
+    transition: var(--transition);
 }
 
 .card-ig-hint.fallback {
