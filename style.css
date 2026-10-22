@@ -2200,3 +2200,101 @@ img {
         justify-content: center;
     }
 }
+
+/* ===== 常駐懸浮 LINE 預約諮詢按鈕 ===== */
+.floating-line-widget {
+    position: fixed;
+    right: 24px;
+    bottom: 28px;
+    z-index: 990;
+    pointer-events: auto;
+}
+
+.floating-line-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #06c755;
+    color: #ffffff !important;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 12px 20px;
+    border-radius: 50px;
+    box-shadow: 0 4px 18px rgba(6, 199, 85, 0.42), 0 2px 6px rgba(0, 0, 0, 0.15);
+    transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1),
+                box-shadow 0.25s ease,
+                background-color 0.2s ease;
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.floating-line-btn:hover {
+    background: #05b34c;
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 8px 24px rgba(6, 199, 85, 0.55), 0 4px 10px rgba(0, 0, 0, 0.2);
+    color: #ffffff !important;
+}
+
+.floating-line-btn:active {
+    transform: translateY(0) scale(0.98);
+}
+
+.floating-line-icon {
+    font-size: 1.5rem;
+    line-height: 1;
+    color: #ffffff;
+}
+
+.floating-line-text {
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+
+/* 微光呼吸脈衝外圈動畫 */
+.floating-line-pulse {
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    border-radius: 50px;
+    border: 2px solid #06c755;
+    opacity: 0.7;
+    animation: linePulse 2.4s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+    pointer-events: none;
+}
+
+@keyframes linePulse {
+    0% {
+        transform: scale(0.96);
+        opacity: 0.8;
+    }
+    60% {
+        transform: scale(1.18);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1.18);
+        opacity: 0;
+    }
+}
+
+/* 手機版適配（小螢幕） */
+@media (max-width: 768px) {
+    .floating-line-widget {
+        right: 16px;
+        bottom: max(20px, env(safe-area-inset-bottom, 20px));
+    }
+
+    .floating-line-btn {
+        padding: 10px 16px;
+        font-size: 0.88rem;
+        box-shadow: 0 4px 16px rgba(6, 199, 85, 0.45);
+    }
+
+    .floating-line-icon {
+        font-size: 1.35rem;
+    }
+}

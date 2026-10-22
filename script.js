@@ -345,6 +345,20 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // ---------- 13. 懸浮 LINE 預約鈕點擊追蹤（回傳 GA4 自訂轉換事件） ----------
+    const floatingLineBtn = document.getElementById('floatingLineBtn');
+    if (floatingLineBtn) {
+        floatingLineBtn.addEventListener('click', function() {
+            if (typeof gtag === 'function') {
+                gtag('event', 'click_floating_line', {
+                    event_category: 'Contact',
+                    event_label: 'Floating Sticky LINE Button',
+                    value: 1
+                });
+            }
+        });
+    }
+
     // 輔助防 XSS
     function escapeHtml(text) {
         if (!text) return '';
