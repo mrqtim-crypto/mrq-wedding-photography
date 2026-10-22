@@ -849,14 +849,37 @@ img {
     position: sticky;
     top: var(--nav-height);
     z-index: 900;
-    background: rgba(12, 13, 14, 0.95);
-    backdrop-filter: blur(12px);
+    background: rgba(12, 13, 14, 0.96);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
     border-top: 1px solid var(--border-light);
     border-bottom: 1px solid var(--border-light);
-    padding: 14px 0;
+    padding: 12px 0 14px 0;
 }
 
 .portfolio-nav-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-align: center;
+}
+
+.portfolio-nav-inner .nav-title-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.portfolio-nav-inner .nav-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: var(--gold);
+}
+
+.portfolio-nav-inner .nav-buttons-row {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -864,41 +887,86 @@ img {
     flex-wrap: wrap;
 }
 
-.portfolio-nav-inner .nav-title {
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    margin-right: 4px;
-}
-
 .p-nav-pill {
     padding: 8px 20px;
     border-radius: 30px;
-    font-size: 0.85rem;
-    color: var(--text-secondary);
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid var(--border-light);
+    font-size: 0.88rem;
+    font-weight: 500;
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    transition: var(--transition);
+    text-decoration: none;
+    transition: all 0.25s ease;
+    cursor: pointer;
 }
 
-.p-nav-pill:hover {
+/* 4 個按鈕顏色不同，保持前方小插圖 */
+/* 1. 婚禮紀錄 - 浪漫溫馨粉紅 */
+.p-nav-pill.pill-wedding {
+    color: #ff9ebb;
+    background: rgba(255, 110, 145, 0.12);
+    border: 1px solid rgba(255, 110, 145, 0.45);
+}
+.p-nav-pill.pill-wedding i {
+    color: #ff6b93;
+}
+.p-nav-pill.pill-wedding:hover {
     color: #ffffff;
-    border-color: rgba(255, 255, 255, 0.3);
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(255, 110, 145, 0.3);
+    border-color: #ff6b93;
+    box-shadow: 0 4px 18px rgba(255, 110, 145, 0.38);
+    transform: translateY(-2px);
 }
 
-.p-nav-pill.active-wedding {
-    color: var(--warm-wedding-accent);
-    border-color: var(--warm-wedding-rose);
-    background: var(--warm-wedding-glow);
+/* 2. 空間攝影 - 俐落建築蔚藍 */
+.p-nav-pill.pill-interior {
+    color: #70d6ff;
+    background: rgba(78, 168, 222, 0.12);
+    border: 1px solid rgba(78, 168, 222, 0.45);
+}
+.p-nav-pill.pill-interior i {
+    color: #4ea8de;
+}
+.p-nav-pill.pill-interior:hover {
+    color: #ffffff;
+    background: rgba(78, 168, 222, 0.3);
+    border-color: #70d6ff;
+    box-shadow: 0 4px 18px rgba(78, 168, 222, 0.38);
+    transform: translateY(-2px);
 }
 
-.p-nav-pill.active-interior {
-    color: var(--pro-interior-accent);
-    border-color: var(--pro-interior-accent);
-    background: var(--pro-interior-glow);
+/* 3. 活動紀錄 - 活力日落琥珀橘 */
+.p-nav-pill.pill-event {
+    color: #ffb703;
+    background: rgba(255, 183, 3, 0.12);
+    border: 1px solid rgba(255, 183, 3, 0.45);
+}
+.p-nav-pill.pill-event i {
+    color: #fb8500;
+}
+.p-nav-pill.pill-event:hover {
+    color: #ffffff;
+    background: rgba(255, 183, 3, 0.3);
+    border-color: #ffb703;
+    box-shadow: 0 4px 18px rgba(255, 183, 3, 0.38);
+    transform: translateY(-2px);
+}
+
+/* 4. 商業拍攝 - 質感翡翠薄荷綠 */
+.p-nav-pill.pill-commercial {
+    color: #2ed573;
+    background: rgba(46, 213, 115, 0.12);
+    border: 1px solid rgba(46, 213, 115, 0.45);
+}
+.p-nav-pill.pill-commercial i {
+    color: #2ed573;
+}
+.p-nav-pill.pill-commercial:hover {
+    color: #ffffff;
+    background: rgba(46, 213, 115, 0.3);
+    border-color: #2ed573;
+    box-shadow: 0 4px 18px rgba(46, 213, 115, 0.38);
+    transform: translateY(-2px);
 }
 
 /* ==========================================================================
@@ -907,6 +975,7 @@ img {
 .portfolio-section {
     padding: 100px 0;
     position: relative;
+    scroll-margin-top: 130px;
 }
 
 .theme-header {
@@ -2089,6 +2158,15 @@ img {
 }
 
 @media (max-width: 600px) {
+    .portfolio-nav-inner .nav-buttons-row {
+        gap: 8px;
+    }
+
+    .p-nav-pill {
+        padding: 7px 14px;
+        font-size: 0.82rem;
+    }
+
     .masonry-gallery {
         column-count: 1;
     }
