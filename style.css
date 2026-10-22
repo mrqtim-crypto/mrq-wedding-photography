@@ -862,7 +862,7 @@ img {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    gap: 8px;
     text-align: center;
 }
 
@@ -870,10 +870,11 @@ img {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: 2px;
 }
 
 .portfolio-nav-inner .nav-title {
-    font-size: 0.95rem;
+    font-size: 0.92rem;
     font-weight: 600;
     letter-spacing: 2px;
     color: var(--gold);
@@ -884,11 +885,12 @@ img {
     align-items: center;
     justify-content: center;
     gap: 12px;
-    flex-wrap: wrap;
 }
 
 .p-nav-pill {
-    padding: 8px 20px;
+    min-width: 140px;
+    justify-content: center;
+    padding: 8px 18px;
     border-radius: 30px;
     font-size: 0.88rem;
     font-weight: 500;
@@ -898,6 +900,7 @@ img {
     text-decoration: none;
     transition: all 0.25s ease;
     cursor: pointer;
+    box-sizing: border-box;
 }
 
 /* 4 個按鈕顏色不同，保持前方小插圖 */
@@ -975,7 +978,7 @@ img {
 .portfolio-section {
     padding: 100px 0;
     position: relative;
-    scroll-margin-top: 130px;
+    scroll-margin-top: 175px;
 }
 
 .theme-header {
@@ -2163,7 +2166,8 @@ img {
     }
 
     .p-nav-pill {
-        padding: 7px 14px;
+        min-width: 130px;
+        padding: 7px 12px;
         font-size: 0.82rem;
     }
 
