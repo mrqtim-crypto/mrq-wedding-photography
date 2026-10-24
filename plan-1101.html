@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="1101婚禮">
+  <meta name="theme-color" content="#121319">
+  <title>文定午宴流程速查</title>
+  <style>
+    :root {
+      --bg: #121319;
+      --card-bg: #1c1e27;
+      --card-border: #2c2f3e;
+      --text: #f3f4f6;
+      --subtext: #9ca3af;
+      --accent: #f43f5e;
+      --gold: #f59e0b;
+      --blue: #38bdf8;
+      --green: #10b981;
+      --warning-bg: rgba(245, 158, 11, 0.12);
+      --warning-border: rgba(245, 158, 11, 0.4);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, sans-serif; -webkit-tap-highlight-color: transparent; }
+    body { background-color: var(--bg); color: var(--text); min-height: 100vh; padding: 16px; padding-top: max(16px, env(safe-area-inset-top)); padding-bottom: max(50px, env(safe-area-inset-bottom)); }
+
+    /* 鎖定頁面 */
+    #lock-screen {
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+      background: #121319; z-index: 9999;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 24px;
+    }
+    .lock-icon { font-size: 48px; margin-bottom: 16px; }
+    .lock-title { font-size: 20px; font-weight: 700; margin-bottom: 8px; color: #fff; }
+    .lock-desc { font-size: 13px; color: var(--subtext); margin-bottom: 24px; text-align: center; }
+    .pin-input {
+      width: 200px; height: 50px; font-size: 26px; text-align: center; letter-spacing: 12px;
+      border: 2px solid var(--card-border); background: var(--card-bg); color: #fff;
+      border-radius: 12px; outline: none; margin-bottom: 16px;
+      transition: all 0.2s ease;
+    }
+    .pin-input:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2); }
+    .unlock-btn {
+      width: 200px; height: 46px; border-radius: 12px; background: var(--accent);
+      color: #fff; font-size: 16px; font-weight: 700; border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+    }
+    .remember-wrap { display: flex; align-items: center; gap: 8px; margin-top: 14px; font-size: 13px; color: var(--subtext); }
+    .error-msg { color: var(--accent); font-size: 13px; margin-top: 12px; min-height: 18px; font-weight: 600; }
+
+    /* 主要內容 (預設隱藏) */
+    #main-content { display: none; }
+
+    /* 頂部 Header */
+    .top-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+    .lock-btn {
+      font-size: 12px; color: var(--subtext); background: var(--card-bg);
+      border: 1px solid var(--card-border); border-radius: 8px; padding: 6px 10px; cursor: pointer;
+    }
+
+    .header-card {
+      background: linear-gradient(145deg, #221c25 0%, #191c28 100%);
+      border: 1px solid rgba(244, 63, 94, 0.3);
+      border-radius: 18px; padding: 18px; margin-bottom: 16px;
+      box-shadow: 0 10px 25px -5px rgba(0,0,0,0.5);
+    }
+    .h-title { font-size: 21px; font-weight: 800; color: #fff; margin-bottom: 6px; }
+    .h-meta { font-size: 13px; color: #cbd5e1; margin-bottom: 12px; display: flex; flex-direction: column; gap: 3px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tag { font-size: 12px; padding: 4px 10px; border-radius: 12px; background: rgba(255,255,255,0.08); color: #e2e8f0; font-weight: 500; }
+    .tag.primary { background: rgba(244, 63, 94, 0.18); color: #fda4af; border: 1px solid rgba(244, 63, 94, 0.35); font-weight: 700; }
+
+    /* 合照禁忌警示卡片 */
+    .alert-card {
+      background: var(--warning-bg); border: 1px solid var(--warning-border);
+      border-radius: 14px; padding: 14px 16px; margin-bottom: 20px;
+    }
+    .alert-head { font-size: 14px; font-weight: 800; color: #fbbf24; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+    .alert-body { font-size: 13px; line-height: 1.5; color: #fef3c7; }
+
+    /* 時間軸標題 */
+    .sec-head {
+      font-size: 16px; font-weight: 800; color: var(--blue);
+      margin: 22px 0 12px 2px; display: flex; align-items: center; justify-content: space-between;
+    }
+    .sec-sub { font-size: 11px; color: var(--subtext); font-weight: normal; }
+
+    /* 時間軸卡片結構 */
+    .timeline { position: relative; padding-left: 22px; }
+    .timeline::before {
+      content: ""; position: absolute; left: 7px; top: 8px; bottom: 8px;
+      width: 2px; background: var(--card-border);
+    }
+    .t-item { position: relative; margin-bottom: 12px; }
+    .t-dot {
+      position: absolute; left: -22px; top: 7px; width: 14px; height: 14px;
+      border-radius: 50%; background: var(--bg); border: 2.5px solid var(--blue);
+    }
+    .t-dot.accent { border-color: var(--accent); background: var(--accent); }
+    .t-dot.gold { border-color: var(--gold); }
+    
+    .t-card {
+      background: var(--card-bg); border: 1px solid var(--card-border);
+      border-radius: 14px; padding: 12px 14px;
+    }
+    .t-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px; }
+    .t-time { font-size: 16px; font-weight: 800; color: var(--blue); font-variant-numeric: tabular-nums; }
+    .t-time.accent { color: var(--accent); }
+    .t-title { font-size: 15px; font-weight: 700; color: #fff; }
+    .t-desc { font-size: 13px; color: var(--subtext); line-height: 1.45; }
+    .t-note { font-size: 12px; color: var(--gold); margin-top: 5px; line-height: 1.4; }
+
+    /* 現場可點擊核對清單 */
+    .check-card {
+      background: var(--card-bg); border: 1px solid var(--card-border);
+      border-radius: 16px; padding: 14px 16px; margin-top: 10px;
+    }
+    .c-item {
+      display: flex; align-items: flex-start; gap: 10px; padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 13px; line-height: 1.45; color: #e5e7eb;
+      cursor: pointer; user-select: none;
+    }
+    .c-item:last-child { border-bottom: none; }
+    .c-item.done { text-decoration: line-through; color: #6b7280; }
+    .c-checkbox {
+      width: 18px; height: 18px; border-radius: 5px; border: 2px solid var(--subtext);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px;
+    }
+    .c-item.done .c-checkbox { background: var(--green); border-color: var(--green); }
+    .c-item.done .c-checkbox::after { content: "✓"; color: #000; font-size: 11px; font-weight: 900; }
+  </style>
+</head>
+<body>
+
+  <!-- 解鎖畫面 -->
+  <div id="lock-screen">
+    <div class="lock-icon">🔒</div>
+    <div class="lock-title">流程速查（私密專用）</div>
+    <div class="lock-desc">請輸入 4 位數解鎖密碼</div>
+    <input type="password" id="pin-code" class="pin-input" maxlength="4" pattern="[0-9]*" inputmode="numeric" placeholder="••••" autofocus>
+    <button class="unlock-btn" onclick="checkPin()">確認解鎖</button>
+    <label class="remember-wrap">
+      <input type="checkbox" id="remember-me" checked> 記住此手機（免重複輸入）
+    </label>
+    <div id="err-text" class="error-msg"></div>
+  </div>
+
+  <!-- 解鎖後的主要內容 -->
+  <div id="main-content">
+    <div class="top-nav">
+      <span style="font-size: 12px; color: var(--subtext);">MR.Q WEDDING</span>
+      <button class="lock-btn" onclick="relock()">重新上鎖 🔒</button>
+    </div>
+
+    <!-- 頂部資訊卡 -->
+    <div class="header-card">
+      <div class="h-title">尤翊丞 ＆ 高郁絜 文定午宴</div>
+      <div class="h-meta">
+        <div>📅 115 年 11 月 1 日（星期日）</div>
+        <div>📍 彭園 3 樓 星海廳 A ｜ 🚪 新娘房：4B</div>
+      </div>
+      <div class="tags">
+        <span class="tag primary">好命婆：小姑姑</span>
+        <span class="tag">旗袍 ➔ 白紗 ➔ 二進 ➔ 送客</span>
+      </div>
+    </div>
+
+    <!-- 重要合照禁忌 -->
+    <div class="alert-card">
+      <div class="alert-head">⚠️ 重要合照禁忌備忘</div>
+      <div class="alert-body">
+        <strong>新郎父母已離異</strong>：<br>
+        現場<strong>切勿單獨安排男方父母合照</strong>，亦不主動喊三人合影！一律以親友大合照或依新人當下指示自然帶過。
+      </div>
+    </div>
+
+    <!-- 時間軸 -->
+    <div class="sec-head">
+      <span>⏱️ 一日總時間軸</span>
+      <span class="sec-sub">按時序進行</span>
+    </div>
+
+    <div class="timeline">
+      <div class="t-item">
+        <div class="t-dot"></div>
+        <div class="t-card">
+          <div class="t-head">
+            <span class="t-time">06:30</span>
+            <span class="t-title">新娘上妝</span>
+          </div>
+          <div class="t-desc">新娘房 4B｜新秘老師開始化妝梳化</div>
+        </div>
+      </div>
+
+      <div class="t-item">
+        <div class="t-dot accent"></div>
+        <div class="t-card" style="border-color: rgba(244,63,94,0.4);">
+          <div class="t-head">
+            <span class="t-time accent">07:40</span>
+            <span class="t-title">攝影師抵達</span>
+          </div>
+          <div class="t-desc">新娘房 4B 開工｜拍攝婚戒、禮服、婚鞋、頭尾禮、金飾、化妝花絮與靜物開箱</div>
+        </div>
+      </div>
+
+      <div class="t-item">
+        <div class="t-dot"></div>
+        <div class="t-card">
+          <div class="t-head">
+            <span class="t-time">09:30</span>
+            <span class="t-title">男方抵達</span>
+          </div>
+          <div class="t-desc">新娘房完妝（旗袍）｜聘禮陳列、取貴重金飾、喝茶長輩就座準備</div>
+        </div>
+      </div>
+
+      <div class="t-item">
+        <div class="t-dot accent"></div>
+        <div class="t-card">
+          <div class="t-head">
+            <span class="t-time accent">10:00</span>
+            <span class="t-title">文定奉茶</span>
+          </div>
+          <div class="t-desc">星海廳｜著旗袍｜好命婆牽引新娘，依序向 8 位長輩奉甜茶</div>
+        </div>
+      </div>
+
+      <div class="t-item">
+        <div class="t-dot accent"></div>
+        <div class="t-card">
+          <div class="t-head">
+            <span class="t-time accent">10:30</span>
+            <span class="t-title">壓茶甌＆儀式</span>
+          </div>
+          <div class="t-desc">收紅包 ➔ 換聘禮 ➔ 坐高椅踩凳 ➔ 戴金飾與戒指（新郎弟協助收紅包）</div>
+        </div>
+      </div>
+
+      <div class="t-item">
+        <div class="t-dot"></div>
+        <div class="t-card">
+          <div class="t-head">
+            <span class="t-time">10:40</span>
+            <span class="t-title">文定合照</span>
+          </div>
+          <div class="t-desc">星海廳親友合影（男方親友 ➔ 女方親友 ➔ 朋友 ➔ 大合照，注意避開父母單獨合影）</div>
+        </div>
+      </div>
+
+      <div class="t-item">
+        <div class="t-dot gold"></div>
+        <div class="t-card">
+          <div class="t-head">
+            <span class="t-time">10:40 - 11:20</span>
+            <span class="t-title">換穿白紗</span>
+          </div>
+          <div class="t-desc">新娘房 4B｜換白紗＋補妝改造型（約 30～40 分鐘）</div>
+        </div>
+      </div>
+
+      <div class="t-item">
+        <div class="t-dot"></div>
+        <div class="t-card">
+          <div class="t-head">
+            <span class="t-time">11:00</span>
+            <span class="t-title">現場彩排</span>
+          </div>
+          <div class="t-desc">宴會廳｜一進人員走位、DJ/燈光配合、攝影師現場確認走位</div>
+        </div>
+      </div>
+
+      <div class="t-item">
+        <div class="t-dot"></div>
+        <div class="t-card">
+          <div class="t-head">
+            <span class="t-time">11:20 - 12:20</span>
+            <span class="t-title">完妝＆迎賓</span>
+          </div>
+          <div class="t-desc">新娘房探房合照、拍類婚紗｜接待區印卡讚測試、迎賓影片輪播</div>
+        </div>
+      </div>
+
+      <div class="t-item">
+        <div class="t-dot"></div>
+        <div class="t-card">
+          <div class="t-head">
+            <span class="t-time">12:25</span>
+            <span class="t-title">開場預報</span>
+          </div>
+          <div class="t-desc">開場前 5 分鐘，總招待請主桌入座，大門口人員定位</div>
+        </div>
+      </div>
+
+      <div class="t-item">
+        <div class="t-dot accent"></div>
+        <div class="t-card" style="border-color: rgba(244,63,94,0.4);">
+          <div class="t-head">
+            <span class="t-time accent">12:30</span>
+            <span class="t-title">第一次進場</span>
+          </div>
+          <div class="t-desc">婚紗側錄影片 ➔ 新郎進場 ➔ 新娘與爸爸 ➔ 交手儀式（擁抱+送花+交手）➔ 香檳塔 ➔ 舉杯</div>
+        </div>
+      </div>
+
+      <div class="t-item">
+        <div class="t-dot"></div>
+        <div class="t-card">
+          <div class="t-head">
+            <span class="t-time">13:00</span>
+            <span class="t-title">開席用餐</span>
+          </div>
+          <div class="t-desc">新人主桌用餐</div>
+        </div>
+      </div>
+
+      <div class="t-item">
+        <div class="t-dot gold"></div>
+        <div class="t-card">
+          <div class="t-head">
+            <span class="t-time">13:10 - 13:30</span>
+            <span class="t-title">換第二套禮服</span>
+          </div>
+          <div class="t-desc">新郎陪同新娘回房換二進造型（約 20～25 分）</div>
+        </div>
+      </div>
+
+      <div class="t-item">
+        <div class="t-dot accent"></div>
+        <div class="t-card">
+          <div class="t-head">
+            <span class="t-time accent">13:40</span>
+            <span class="t-title">第二次進場</span>
+          </div>
+          <div class="t-desc">成長愛情影片 ➔ 敲敲杯 ➔ Kahoot 快問快答 ➔ 幸福大轉盤抽獎 5 位</div>
+        </div>
+      </div>
+
+      <div class="t-item">
+        <div class="t-dot"></div>
+        <div class="t-card">
+          <div class="t-head">
+            <span class="t-time">14:20</span>
+            <span class="t-title">逐桌敬酒</span>
+          </div>
+          <div class="t-desc">新人＋雙方主婚人逐桌敬酒（餐廳備酒*6）</div>
+        </div>
+      </div>
+
+      <div class="t-item">
+        <div class="t-dot gold"></div>
+        <div class="t-card">
+          <div class="t-head">
+            <span class="t-time">14:30 - 14:50</span>
+            <span class="t-title">換送客禮服</span>
+          </div>
+          <div class="t-desc">新郎陪同，換第三套造型（約 20～25 分）</div>
+        </div>
+      </div>
+
+      <div class="t-item">
+        <div class="t-dot accent"></div>
+        <div class="t-card" style="border-color: rgba(244,63,94,0.4);">
+          <div class="t-head">
+            <span class="t-time accent">15:00</span>
+            <span class="t-title">送客合照</span>
+          </div>
+          <div class="t-desc">送客背板前、彭園喜糖、親友合照留念</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 現場核對清單（可點擊打勾） -->
+    <div class="sec-head">
+      <span>🔍 現場重點核對（可直接點擊勾選）</span>
+    </div>
+    <div class="check-card">
+      <div class="c-item" onclick="toggleCheck(this, 1)">
+        <div class="c-checkbox"></div>
+        <div><strong>奉茶順序（共 8 位）：</strong><br>1.爸爸 ➔ 2.媽媽 ➔ 3.阿嬤 ➔ 4.二姨 ➔ 5.二姨丈 ➔ 6.大姑姑 ➔ 7.大姑丈 ➔ 8.新郎翊丞</div>
+      </div>
+      <div class="c-item" onclick="toggleCheck(this, 2)">
+        <div class="c-checkbox"></div>
+        <div><strong>戒指與金飾佩戴：</strong><br>男左手、女右手（中指，紅線綁好）；男方媽媽戴女方、女方媽媽戴男方項鍊。</div>
+      </div>
+      <div class="c-item" onclick="toggleCheck(this, 3)">
+        <div class="c-checkbox"></div>
+        <div><strong>一進交手儀式：</strong><br>擁抱 ➔ 送捧花 ➔ 爸爸交手牽引 ➔ 上舞台倒香檳塔。</div>
+      </div>
+      <div class="c-item" onclick="toggleCheck(this, 4)">
+        <div class="c-checkbox"></div>
+        <div><strong>二進活動道具確認：</strong><br>Ivy 敲敲杯道具、Kahoot 筆電連線、大轉盤 5 位中獎禮。</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // SHA256 of 0310
+    const TARGET_HASH = "408a5ee676694af19215cb22b2cd871e39c693f907933583ece00eda8d73ee16";
+
+    async function sha256(str) {
+      const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(str));
+      return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    async function checkPin() {
+      const pin = document.getElementById("pin-code").value;
+      const err = document.getElementById("err-text");
+      const hash = await sha256(pin);
+      if (hash === TARGET_HASH) {
+        if (document.getElementById("remember-me").checked) {
+          localStorage.setItem("auth_1101", hash);
+        }
+        unlock();
+      } else {
+        err.innerText = "密碼不正確，請重新輸入";
+        document.getElementById("pin-code").value = "";
+      }
+    }
+
+    function unlock() {
+      document.getElementById("lock-screen").style.display = "none";
+      document.getElementById("main-content").style.display = "block";
+      loadChecks();
+    }
+
+    function relock() {
+      localStorage.removeItem("auth_1101");
+      location.reload();
+    }
+
+    function toggleCheck(el, id) {
+      el.classList.toggle("done");
+      const done = el.classList.contains("done");
+      localStorage.setItem("check_" + id, done ? "1" : "0");
+    }
+
+    function loadChecks() {
+      [1, 2, 3, 4].forEach(id => {
+        if (localStorage.getItem("check_" + id) === "1") {
+          const items = document.querySelectorAll(".c-item");
+          if (items[id - 1]) items[id - 1].classList.add("done");
+        }
+      });
+    }
+
+    // 自動檢查是否記住登入
+    window.onload = function() {
+      if (localStorage.getItem("auth_1101") === TARGET_HASH) {
+        unlock();
+      }
+      document.getElementById("pin-code").addEventListener("keyup", function(e) {
+        if (this.value.length === 4) {
+          checkPin();
+        }
+      });
+    };
+  </script>
+</body>
+</html>
