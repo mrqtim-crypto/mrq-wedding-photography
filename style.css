@@ -238,6 +238,7 @@ img {
 }
 
 .nav-logo img {
+    width: auto;
     height: 44px;
     transition: var(--transition);
 }
@@ -1834,6 +1835,7 @@ img {
 }
 
 .footer-logo img {
+    width: auto;
     height: 48px;
     margin-bottom: 16px;
     filter: brightness(0) invert(1);
