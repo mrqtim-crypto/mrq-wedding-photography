@@ -4,19 +4,19 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    // ---------- 1. 載入動畫 Loader ----------
+    // ---------- 1. 載入動畫 Loader (極速開啟，優化 IG 內建瀏覽器體驗) ----------
     const loader = document.getElementById('loader');
     window.addEventListener('load', () => {
         setTimeout(() => {
             loader.classList.add('hidden');
-        }, 1200);
+        }, 450);
     });
-    // Fallback 最多 2.5 秒關閉
+    // Fallback 最多 1.2 秒關閉
     setTimeout(() => {
         if (!loader.classList.contains('hidden')) {
             loader.classList.add('hidden');
         }
-    }, 2500);
+    }, 1200);
 
 
     // ---------- 2. 導覽列滾動效果 & 活躍標記 ----------
@@ -111,6 +111,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
             lightbox.classList.add('active');
             document.body.style.overflow = 'hidden';
+
+            if (typeof gtag === 'function') {
+                gtag('event', 'view_portfolio_photo', {
+                    event_category: 'Portfolio',
+                    event_label: title || src
+                });
+            }
         });
     });
 
@@ -345,14 +352,56 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // ---------- 13. 懸浮 LINE 預約鈕點擊追蹤（回傳 GA4 自訂轉換事件） ----------
-    const floatingLineBtn = document.getElementById('floatingLineBtn');
-    if (floatingLineBtn) {
-        floatingLineBtn.addEventListener('click', function() {
+    // ---------- 13. 全站轉換事件追蹤（自動回傳 GA4 關鍵行為數據） ----------
+    // (A) 追蹤所有 LINE 預約諮詢點擊
+    document.querySelectorAll('a[href*="line.me"]').forEach(link => {
+        link.addEventListener('click', function() {
             if (typeof gtag === 'function') {
-                gtag('event', 'click_floating_line', {
-                    event_category: 'Contact',
-                    event_label: 'Floating Sticky LINE Button',
+                const label = this.id === 'floatingLineBtn' ? 'Floating Bottom LINE' : (this.textContent.trim() || 'Navbar/Icon LINE');
+                gtag('event', 'click_line_consult', {
+                    event_category: 'Conversion',
+                    event_label: label,
+                    value: 1
+                });
+            }
+        });
+    });
+
+    // (B) 追蹤所有 Instagram 作品與主頁點擊
+    document.querySelectorAll('a[href*="instagram.com"]').forEach(link => {
+        link.addEventListener('click', function() {
+            if (typeof gtag === 'function') {
+                const cardTitle = this.querySelector('h4') ? this.querySelector('h4').textContent.trim() : '';
+                const label = cardTitle || this.getAttribute('title') || 'IG Official Profile';
+                gtag('event', 'click_instagram', {
+                    event_category: 'Social',
+                    event_label: label
+                });
+            }
+        });
+    });
+
+    // (C) 追蹤所有 Facebook 粉絲專頁點擊
+    document.querySelectorAll('a[href*="facebook.com"]').forEach(link => {
+        link.addEventListener('click', function() {
+            if (typeof gtag === 'function') {
+                gtag('event', 'click_facebook', {
+                    event_category: 'Social',
+                    event_label: 'FB Fan Page'
+                });
+            }
+        });
+    });
+
+    // (D) 追蹤預約表單成功送出
+    if (contactForm) {
+        contactForm.addEventListener('submit', function() {
+            if (typeof gtag === 'function') {
+                const serviceSelect = document.getElementById('form-service');
+                const serviceVal = serviceSelect ? serviceSelect.value : '未指定';
+                gtag('event', 'generate_lead', {
+                    event_category: 'Conversion',
+                    event_label: serviceVal,
                     value: 1
                 });
             }

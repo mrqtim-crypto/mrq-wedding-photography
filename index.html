@@ -47,10 +47,11 @@
     <link rel="icon" type="image/png" href="images/LOGO.PNG">
     <link rel="apple-touch-icon" href="images/LOGO.PNG">
 
-    <!-- ===== 預先連接外部資源加速載入 ===== -->
+    <!-- ===== 預先連接外部資源與首屏主視覺圖加速載入 (LCP 優化) ===== -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preload" as="image" href="images/%E5%9F%BA%E9%9A%86%20%E5%BD%AD%E5%9C%92%E6%9C%83%E9%A4%A8%20%E5%8D%88%E5%AE%B4A.jpg" fetchpriority="high">
     
     <!-- ===== Google Fonts 與 Font Awesome ===== -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@300;400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -1045,9 +1046,27 @@
             </div>
         </section>
 
-        <!-- ===== 短影片專區 (預告) ===== -->
+        <!-- ===== Instagram 官方即時作品牆 & 短影片專區 ===== -->
         <section id="portfolio-video" class="section section-dark video-teaser-section">
             <div class="container">
+                <div class="ig-showcase-card reveal-up" style="margin-bottom: 32px;">
+                    <div class="ig-showcase-icon"><i class="fab fa-instagram"></i></div>
+                    <span class="section-label center">OFFICIAL INSTAGRAM</span>
+                    <h3 class="teaser-title">追蹤 IG 觀看更多完整作品輯</h3>
+                    <p class="teaser-desc">
+                        官網精選之外，更多最新婚禮紀實全輯、室內空間設計開箱與拍攝現場花絮，皆定期更新於官方 Instagram。<br>
+                        歡迎點擊追蹤 <strong>@mr.q_wedding_photography</strong>，隨時掌握最新影像故事與檔期動態！
+                    </p>
+                    <div class="teaser-actions">
+                        <a href="https://www.instagram.com/mr.q_wedding_photography/" target="_blank" rel="noopener noreferrer" class="btn-ig-gradient">
+                            <i class="fab fa-instagram"></i> 前往 Instagram (@mr.q_wedding_photography)
+                        </a>
+                        <a href="https://line.me/ti/p/~ken03101" target="_blank" rel="noopener noreferrer" class="btn-line-hero">
+                            <i class="fab fa-line"></i> LINE 詢問檔期 (ID: ken03101)
+                        </a>
+                    </div>
+                </div>
+
                 <div class="video-teaser-card reveal-up">
                     <div class="video-icon"><i class="fas fa-film"></i></div>
                     <span class="section-label center">COMING SOON</span>
