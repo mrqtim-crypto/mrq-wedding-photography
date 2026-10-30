@@ -3,9 +3,13 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
  <url>
  <loc>https://mrqtim-crypto.github.io/mrq-wedding-photography/</loc>
- <lastmod>2026-10-25</lastmod>
+ <lastmod>2026-10-30</lastmod>
  <changefreq>weekly</changefreq>
  <priority>1.0</priority>
+ <image:image>
+ <image:loc>https://mrqtim-crypto.github.io/mrq-wedding-photography/images/og-cover.jpg</image:loc>
+ <image:title>Mr.Q Photography 視界攝影 官方社群旗艦封面 - 攝影師 Mr.Q</image:title>
+ </image:image>
  <image:image>
  <image:loc>https://mrqtim-crypto.github.io/mrq-wedding-photography/images/LOGO.PNG</image:loc>
  <image:title>LOGO 攝影作品 - Mr.Q Photography</image:title>

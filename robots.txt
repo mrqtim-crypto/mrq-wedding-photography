@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /plan-1101.html
 
 Sitemap: https://mrqtim-crypto.github.io/mrq-wedding-photography/sitemap.xml
