@@ -73,7 +73,20 @@
       box-shadow: var(--shadow-md);
     }
     .h-title { font-size: 23px; font-weight: 800; color: #0f172a; margin-bottom: 4px; letter-spacing: -0.5px; }
-    .h-hsr { font-size: 13px; font-weight: 700; color: #c2410c; background: #ffedd5; display: inline-block; padding: 3px 10px; border-radius: 8px; margin-bottom: 12px; }
+    .h-hsr { font-size: 13px; font-weight: 700; color: #c2410c; background: #ffedd5; display: inline-block; padding: 3px 10px; border-radius: 8px; margin-bottom: 10px; }
+    .hsr-box {
+      background: #ffffff;
+      border: 1px dashed #fb923c;
+      border-radius: 12px;
+      padding: 10px 14px;
+      margin-bottom: 14px;
+      font-size: 13px;
+      line-height: 1.6;
+      color: #9a3412;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+    }
+    .hsr-box-row { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 4px; }
+    .hsr-code { font-weight: 800; font-size: 15px; color: #ea580c; font-family: monospace; letter-spacing: 1px; }
     .h-meta { font-size: 13px; color: #475569; margin-bottom: 14px; display: flex; flex-direction: column; gap: 5px; line-height: 1.45; }
     .tags { display: flex; flex-wrap: wrap; gap: 6px; }
     .tag { font-size: 12px; padding: 4px 10px; border-radius: 10px; background: #f1f5f9; color: #475569; font-weight: 600; border: 1px solid #e2e8f0; }
@@ -172,6 +185,18 @@
     <div class="header-card">
       <div class="h-title">11/8 婚禮流程</div>
       <div><span class="h-hsr">🚄 11/7 中午搭高鐵去高雄</span></div>
+
+      <!-- 高鐵去程票務速查備忘 -->
+      <div class="hsr-box">
+        <div class="hsr-box-row">
+          <span><strong>🚄 去程車次：</strong>1225（南港 12:40 - 左營 14:30）</span>
+        </div>
+        <div class="hsr-box-row">
+          <span><strong>💺 座位車廂：</strong>標準車廂 (3 車 3A)</span>
+          <span><strong>🎫 訂位代號：</strong><span class="hsr-code">01987334</span></span>
+        </div>
+      </div>
+
       <div class="h-meta">
         <div>👰 <strong>新娘</strong>：詹玉楨 ｜ 🤵 <strong>新郎</strong>：溫帛倫</div>
         <div>👨‍👩‍👧 <strong>男方父母</strong>：溫增龍、李美鳳 ｜ <strong>女方父母</strong>：詹順揚、邱莉芬</div>
