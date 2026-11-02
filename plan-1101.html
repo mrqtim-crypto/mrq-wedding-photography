@@ -6,9 +6,9 @@
   <meta name="robots" content="noindex, nofollow, noarchive">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="高郁絜&尤翊丞">
+  <meta name="apple-mobile-web-app-title" content="帛倫&玉楨婚禮">
   <meta name="theme-color" content="#121319">
-  <title>高郁絜 ＆ 尤翊丞 文定午宴流程速查</title>
+  <title>溫帛倫 ＆ 詹玉楨 迎娶午宴流程速查</title>
   <style>
     :root {
       --bg: #121319;
@@ -20,8 +20,8 @@
       --gold: #f59e0b;
       --blue: #38bdf8;
       --green: #10b981;
-      --warning-bg: rgba(245, 158, 11, 0.12);
-      --warning-border: rgba(245, 158, 11, 0.4);
+      --purple: #c084fc;
+      --tag-bg: rgba(244, 63, 94, 0.18);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, sans-serif; -webkit-tap-highlight-color: transparent; }
     body { background-color: var(--bg); color: var(--text); min-height: 100vh; padding: 16px; padding-top: max(16px, env(safe-area-inset-top)); padding-bottom: max(50px, env(safe-area-inset-bottom)); }
@@ -51,10 +51,9 @@
     .remember-wrap { display: flex; align-items: center; gap: 8px; margin-top: 14px; font-size: 13px; color: var(--subtext); }
     .error-msg { color: var(--accent); font-size: 13px; margin-top: 12px; min-height: 18px; font-weight: 600; }
 
-    /* 主要內容 (預設隱藏) */
+    /* 主要內容 */
     #main-content { display: none; }
 
-    /* 頂部 Header */
     .top-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
     .lock-btn {
       font-size: 12px; color: var(--subtext); background: var(--card-bg);
@@ -68,27 +67,18 @@
       box-shadow: 0 10px 25px -5px rgba(0,0,0,0.5);
     }
     .h-title { font-size: 21px; font-weight: 800; color: #fff; margin-bottom: 6px; }
-    .h-meta { font-size: 13px; color: #cbd5e1; margin-bottom: 12px; display: flex; flex-direction: column; gap: 3px; }
+    .h-meta { font-size: 13px; color: #cbd5e1; margin-bottom: 12px; display: flex; flex-direction: column; gap: 4px; line-height: 1.4; }
     .tags { display: flex; flex-wrap: wrap; gap: 6px; }
     .tag { font-size: 12px; padding: 4px 10px; border-radius: 12px; background: rgba(255,255,255,0.08); color: #e2e8f0; font-weight: 500; }
-    .tag.primary { background: rgba(244, 63, 94, 0.18); color: #fda4af; border: 1px solid rgba(244, 63, 94, 0.35); font-weight: 700; }
+    .tag.primary { background: var(--tag-bg); color: #fda4af; border: 1px solid rgba(244, 63, 94, 0.35); font-weight: 700; }
 
-    /* 合照禁忌警示卡片 */
-    .alert-card {
-      background: var(--warning-bg); border: 1px solid var(--warning-border);
-      border-radius: 14px; padding: 14px 16px; margin-bottom: 20px;
-    }
-    .alert-head { font-size: 14px; font-weight: 800; color: #fbbf24; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
-    .alert-body { font-size: 13px; line-height: 1.5; color: #fef3c7; }
-
-    /* 時間軸標題 */
     .sec-head {
       font-size: 16px; font-weight: 800; color: var(--blue);
       margin: 22px 0 12px 2px; display: flex; align-items: center; justify-content: space-between;
     }
     .sec-sub { font-size: 11px; color: var(--subtext); font-weight: normal; }
 
-    /* 時間軸卡片結構 */
+    /* 時間軸 */
     .timeline { position: relative; padding-left: 22px; }
     .timeline::before {
       content: ""; position: absolute; left: 7px; top: 8px; bottom: 8px;
@@ -101,6 +91,7 @@
     }
     .t-dot.accent { border-color: var(--accent); background: var(--accent); }
     .t-dot.gold { border-color: var(--gold); }
+    .t-dot.purple { border-color: var(--purple); }
     
     .t-card {
       background: var(--card-bg); border: 1px solid var(--card-border);
@@ -109,11 +100,25 @@
     .t-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px; }
     .t-time { font-size: 16px; font-weight: 800; color: var(--blue); font-variant-numeric: tabular-nums; }
     .t-time.accent { color: var(--accent); }
+    .t-time.gold { color: var(--gold); }
     .t-title { font-size: 15px; font-weight: 700; color: #fff; }
     .t-desc { font-size: 13px; color: var(--subtext); line-height: 1.45; }
     .t-note { font-size: 12px; color: var(--gold); margin-top: 5px; line-height: 1.4; }
 
-    /* 現場可點擊核對清單 */
+    /* 車隊清單卡片 */
+    .fleet-card {
+      background: var(--card-bg); border: 1px solid var(--card-border);
+      border-radius: 16px; padding: 14px 16px; margin-top: 10px;
+    }
+    .fleet-row {
+      display: flex; flex-direction: column; gap: 3px; padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 13px; line-height: 1.45;
+    }
+    .fleet-row:last-child { border-bottom: none; }
+    .fleet-car-title { font-weight: 700; color: var(--gold); display: flex; align-items: center; gap: 6px; }
+    .fleet-info { color: #d1d5db; font-size: 13px; padding-left: 2px; }
+
+    /* 核對清單 */
     .check-card {
       background: var(--card-bg); border: 1px solid var(--card-border);
       border-radius: 16px; padding: 14px 16px; margin-top: 10px;
@@ -138,8 +143,8 @@
   <!-- 解鎖畫面 -->
   <div id="lock-screen">
     <div class="lock-icon">🔒</div>
-    <div class="lock-title">高郁絜 ＆ 尤翊丞</div>
-    <div class="lock-desc">文定午宴流程速查（私密專用）<br>請輸入 4 位數解鎖密碼</div>
+    <div class="lock-title">溫帛倫 ＆ 詹玉楨</div>
+    <div class="lock-desc">迎娶＆婚宴流程速查（私密專用）<br>請輸入 4 位數解鎖密碼</div>
     <input type="password" id="pin-code" class="pin-input" maxlength="4" pattern="[0-9]*" inputmode="numeric" placeholder="••••" autofocus>
     <button class="unlock-btn" onclick="checkPin()">確認解鎖</button>
     <label class="remember-wrap">
@@ -148,7 +153,7 @@
     <div id="err-text" class="error-msg"></div>
   </div>
 
-  <!-- 解鎖後的主要內容 -->
+  <!-- 解鎖後主要內容 -->
   <div id="main-content">
     <div class="top-nav">
       <span style="font-size: 12px; color: var(--subtext);">MR.Q WEDDING</span>
@@ -157,24 +162,18 @@
 
     <!-- 頂部資訊卡 -->
     <div class="header-card">
-      <div class="h-title">高郁絜 ＆ 尤翊丞 文定午宴</div>
+      <div class="h-title">溫帛倫 ＆ 詹玉楨 迎娶午宴</div>
       <div class="h-meta">
-        <div>👰 <strong>新娘</strong>：高郁絜 ｜ 🤵 <strong>新郎</strong>：尤翊丞</div>
-        <div>📅 115 年 11 月 1 日（星期日）</div>
-        <div>📍 彭園 3 樓 星海廳 A ｜ 🚪 新娘房：4B</div>
+        <div>👰 <strong>新娘</strong>：詹玉楨 ｜ 🤵 <strong>新郎</strong>：溫帛倫</div>
+        <div>👨‍👩‍👧 <strong>男方父母</strong>：溫增龍、李美鳳 ｜ <strong>女方父母</strong>：詹順揚、邱莉芬</div>
+        <div>📅 2026/11/08（日） ｜ 🪑 桌數：14 桌 ｜ 禮服：白紗＋龍鳳褂</div>
+        <div>📍 <strong>宴客地點</strong>：阿海餐廳（高雄市美濃區新興街 2-5 號）</div>
       </div>
       <div class="tags">
-        <span class="tag primary">好命婆：小姑姑</span>
-        <span class="tag">旗袍 ➔ 白紗 ➔ 二進 ➔ 送客</span>
-      </div>
-    </div>
-
-    <!-- 重要合照禁忌 -->
-    <div class="alert-card">
-      <div class="alert-head">⚠️ 重要合照禁忌備忘</div>
-      <div class="alert-body">
-        <strong>新郎父母已離異</strong>：<br>
-        現場<strong>切勿單獨安排男方父母合照</strong>，亦不主動喊三人合影！一律以親友大合照或依新人當下指示自然帶過。
+        <span class="tag primary">總召：劉芳伶</span>
+        <span class="tag">開門禮：劉宬鋼</span>
+        <span class="tag">放鞭炮：劉彥岐哥</span>
+        <span class="tag">小管家 / 伴郎伴娘 2 對</span>
       </div>
     </div>
 
@@ -185,146 +184,101 @@
     </div>
 
     <div class="timeline">
+      <!-- 晨間開妝 -->
+      <div class="t-item">
+        <div class="t-dot"></div>
+        <div class="t-card">
+          <div class="t-head">
+            <span class="t-time">06:00</span>
+            <span class="t-title">女方開妝</span>
+          </div>
+          <div class="t-desc">
+            06:00-09:00 新娘<br>
+            06:30-07:30 伴娘 (鄧)<br>
+            07:00-08:00 媽媽 (莉芬)<br>
+            08:00-09:00 伴娘 (晴)
+          </div>
+        </div>
+      </div>
+
       <div class="t-item">
         <div class="t-dot"></div>
         <div class="t-card">
           <div class="t-head">
             <span class="t-time">06:30</span>
-            <span class="t-title">新娘上妝</span>
+            <span class="t-title">男方開妝</span>
           </div>
-          <div class="t-desc">新娘房 4B｜新秘老師開始化妝梳化</div>
+          <div class="t-desc">
+            06:30-07:30 媒人婆 ｜ 07:30-08:00 新郎<br>
+            08:00-08:30 安 ｜ 08:30-09:30 媽媽 (美鳳) & 外婆
+          </div>
         </div>
       </div>
 
+      <!-- 攝影師開工 -->
       <div class="t-item">
         <div class="t-dot accent"></div>
         <div class="t-card" style="border-color: rgba(244,63,94,0.4);">
           <div class="t-head">
-            <span class="t-time accent">07:40</span>
-            <span class="t-title">攝影師抵達</span>
+            <span class="t-time accent">08:00</span>
+            <span class="t-title">攝影師出發前往男方家</span>
           </div>
-          <div class="t-desc">新娘房 4B 開工｜拍攝婚戒、禮服、婚鞋、頭尾禮、金飾、化妝花絮與靜物開箱</div>
+          <div class="t-desc"><strong>郭伴郎與攝影師前往男方家</strong>開工拍攝</div>
         </div>
       </div>
 
-      <div class="t-item">
-        <div class="t-dot"></div>
-        <div class="t-card">
-          <div class="t-head">
-            <span class="t-time">09:30</span>
-            <span class="t-title">男方抵達</span>
-          </div>
-          <div class="t-desc">新娘房完妝（旗袍）｜聘禮陳列、取貴重金飾、喝茶長輩就座準備</div>
-        </div>
-      </div>
-
-      <div class="t-item">
-        <div class="t-dot accent"></div>
-        <div class="t-card">
-          <div class="t-head">
-            <span class="t-time accent">10:00</span>
-            <span class="t-title">文定奉茶</span>
-          </div>
-          <div class="t-desc">星海廳｜著旗袍｜好命婆牽引新娘，依序向 8 位長輩奉甜茶</div>
-        </div>
-      </div>
-
-      <div class="t-item">
-        <div class="t-dot accent"></div>
-        <div class="t-card">
-          <div class="t-head">
-            <span class="t-time accent">10:30</span>
-            <span class="t-title">壓茶甌＆儀式</span>
-          </div>
-          <div class="t-desc">收紅包 ➔ 換聘禮 ➔ 坐高椅踩凳 ➔ 戴金飾與戒指（新郎弟協助收紅包）</div>
-        </div>
-      </div>
-
-      <div class="t-item">
-        <div class="t-dot"></div>
-        <div class="t-card">
-          <div class="t-head">
-            <span class="t-time">10:40</span>
-            <span class="t-title">文定合照</span>
-          </div>
-          <div class="t-desc">星海廳親友合影（男方親友 ➔ 女方親友 ➔ 朋友 ➔ 大合照，注意避開父母單獨合影）</div>
-        </div>
-      </div>
-
+      <!-- 迎娶出發 -->
       <div class="t-item">
         <div class="t-dot gold"></div>
         <div class="t-card">
           <div class="t-head">
-            <span class="t-time">10:40 - 11:20</span>
-            <span class="t-title">換穿白紗</span>
+            <span class="t-time gold">09:00</span>
+            <span class="t-title">男方迎娶出發（6台車）</span>
           </div>
-          <div class="t-desc">新娘房 4B｜換白紗＋補妝改造型（約 30～40 分鐘）</div>
+          <div class="t-desc">
+            <strong>1車 (禮砲車)</strong>：駕駛 大溫 / 砲手 小劉董、<strong>攝影師</strong><br>
+            <strong>2車 (新娘車)</strong>：駕駛 安安 / 乘客 淑惠、倫 (新郎)
+          </div>
+          <div class="t-note">※ 完整車隊配置可見下方專屬清單</div>
         </div>
       </div>
 
-      <div class="t-item">
-        <div class="t-dot"></div>
-        <div class="t-card">
-          <div class="t-head">
-            <span class="t-time">11:00</span>
-            <span class="t-title">現場彩排</span>
-          </div>
-          <div class="t-desc">宴會廳｜一進人員走位、DJ/燈光配合、攝影師現場確認走位</div>
-        </div>
-      </div>
-
-      <div class="t-item">
-        <div class="t-dot"></div>
-        <div class="t-card">
-          <div class="t-head">
-            <span class="t-time">11:20 - 12:20</span>
-            <span class="t-title">完妝＆迎賓</span>
-          </div>
-          <div class="t-desc">新娘房探房合照、拍類婚紗｜接待區印卡讚測試、迎賓影片輪播</div>
-        </div>
-      </div>
-
-      <div class="t-item">
-        <div class="t-dot"></div>
-        <div class="t-card">
-          <div class="t-head">
-            <span class="t-time">12:25</span>
-            <span class="t-title">開場預報</span>
-          </div>
-          <div class="t-desc">開場前 5 分鐘，總招待請主桌入座，大門口人員定位</div>
-        </div>
-      </div>
-
+      <!-- 迎娶闖關與拜別 -->
       <div class="t-item">
         <div class="t-dot accent"></div>
         <div class="t-card" style="border-color: rgba(244,63,94,0.4);">
           <div class="t-head">
-            <span class="t-time accent">12:30</span>
-            <span class="t-title">第一次進場</span>
+            <span class="t-time accent">09:30</span>
+            <span class="t-title">迎娶遊戲 ＆ 拜別父母</span>
           </div>
-          <div class="t-desc">婚紗側錄影片 ➔ 新郎進場 ➔ 新娘與爸爸 ➔ 交手儀式（擁抱+送花+交手）➔ 香檳塔 ➔ 舉杯</div>
+          <div class="t-desc">女方家抵達 ➔ 闖關互動遊戲 ➔ 溫馨拜別岳父順揚、岳母莉芬 ➔ 蓋頭紗擲扇出閣</div>
         </div>
       </div>
 
-      <div class="t-item">
-        <div class="t-dot"></div>
-        <div class="t-card">
-          <div class="t-head">
-            <span class="t-time">13:00</span>
-            <span class="t-title">開席用餐</span>
-          </div>
-          <div class="t-desc">新人主桌用餐</div>
-        </div>
-      </div>
-
+      <!-- 返程 -->
       <div class="t-item">
         <div class="t-dot gold"></div>
         <div class="t-card">
           <div class="t-head">
-            <span class="t-time">13:10 - 13:30</span>
-            <span class="t-title">換第二套禮服</span>
+            <span class="t-time gold">10:20</span>
+            <span class="t-title">迎娶車隊返程</span>
           </div>
-          <div class="t-desc">新郎陪同新娘回房換二進造型（約 20～25 分）</div>
+          <div class="t-desc">
+            <strong>1車 (禮砲車)</strong>：大溫 / 小劉董、攝影師<br>
+            <strong>2車 (新娘車)</strong>：安安 / 淑惠、新郎、新娘
+          </div>
+        </div>
+      </div>
+
+      <!-- 進男方家 -->
+      <div class="t-item">
+        <div class="t-dot"></div>
+        <div class="t-card">
+          <div class="t-head">
+            <span class="t-time">10:55</span>
+            <span class="t-title">開車門（開門：劉宬鋼）</span>
+          </div>
+          <div class="t-desc">抵達男方家，開門禮摸蘋果/橘子</div>
         </div>
       </div>
 
@@ -332,10 +286,34 @@
         <div class="t-dot accent"></div>
         <div class="t-card">
           <div class="t-head">
-            <span class="t-time accent">13:40</span>
-            <span class="t-title">第二次進場</span>
+            <span class="t-time accent">11:00</span>
+            <span class="t-title">進新房</span>
           </div>
-          <div class="t-desc">成長愛情影片 ➔ 敲敲杯 ➔ Kahoot 快問快答 ➔ 幸福大轉盤抽獎 5 位</div>
+          <div class="t-desc">新人入新房、坐同心椅、掀頭紗、親友合照</div>
+        </div>
+      </div>
+
+      <!-- 餐廳迎接 -->
+      <div class="t-item">
+        <div class="t-dot"></div>
+        <div class="t-card">
+          <div class="t-head">
+            <span class="t-time">11:30</span>
+            <span class="t-title">男方於餐廳放鞭炮迎接親家</span>
+          </div>
+          <div class="t-desc">放鞭炮人員：<strong>劉彥岐哥</strong> ｜ 阿海餐廳抵達迎賓</div>
+        </div>
+      </div>
+
+      <!-- 喜宴迎賓 -->
+      <div class="t-item">
+        <div class="t-dot"></div>
+        <div class="t-card">
+          <div class="t-head">
+            <span class="t-time">11:30 - 12:20</span>
+            <span class="t-title">迎賓時間 ＆ 音樂暖場</span>
+          </div>
+          <div class="t-desc">播放新人 Spotify 背景曲、婚紗 MV 輪播、賓客入席</div>
         </div>
       </div>
 
@@ -343,56 +321,212 @@
         <div class="t-dot"></div>
         <div class="t-card">
           <div class="t-head">
-            <span class="t-time">14:20</span>
-            <span class="t-title">逐桌敬酒</span>
+            <span class="t-time">12:20 - 12:30</span>
+            <span class="t-title">入席提醒 ＆ 主持人開場</span>
           </div>
-          <div class="t-desc">新人＋雙方主婚人逐桌敬酒（餐廳備酒*6）</div>
+          <div class="t-desc">12:20 提醒賓客入席 ➔ 12:25 主持人開場、進場人員門口定位</div>
         </div>
       </div>
 
-      <div class="t-item">
-        <div class="t-dot gold"></div>
-        <div class="t-card">
-          <div class="t-head">
-            <span class="t-time">14:30 - 14:50</span>
-            <span class="t-title">換送客禮服</span>
-          </div>
-          <div class="t-desc">新郎陪同，換第三套造型（約 20～25 分）</div>
-        </div>
-      </div>
-
+      <!-- 第一次進場 -->
       <div class="t-item">
         <div class="t-dot accent"></div>
         <div class="t-card" style="border-color: rgba(244,63,94,0.4);">
           <div class="t-head">
-            <span class="t-time accent">15:00</span>
-            <span class="t-title">送客合照</span>
+            <span class="t-time accent">12:30 - 12:40</span>
+            <span class="t-title">第一次進場（西式白紗）</span>
           </div>
-          <div class="t-desc">送客背板前、彭園喜糖、親友合照留念</div>
+          <div class="t-desc">
+            播開場 MV ➔ <strong>進場順序：</strong><br>
+            1. 男方主婚人 (溫增龍、李美鳳) 入席<br>
+            2. 伴郎伴娘 2 對進場<br>
+            3. 新郎 ＋ 莉芬媽媽 (女方) ➔ 至紅毯中間點<br>
+            4. 新娘 ＋ 順揚爸爸 (女方) ➔ 交手儀式<br>
+            5. 女方主婚人入席<br>
+            6. 新人持捧花上舞台
+          </div>
+          <div class="t-note">小管家安排引導 ｜ 音樂：1 進場曲 / 2 新人進場曲</div>
+        </div>
+      </div>
+
+      <!-- 交換婚戒與開席 -->
+      <div class="t-item">
+        <div class="t-dot accent"></div>
+        <div class="t-card">
+          <div class="t-head">
+            <span class="t-time accent">12:40 - 12:45</span>
+            <span class="t-title">交換婚戒</span>
+          </div>
+          <div class="t-desc">遞戒指人員：<strong>浩庭拿戒指</strong></div>
+        </div>
+      </div>
+
+      <div class="t-item">
+        <div class="t-dot"></div>
+        <div class="t-card">
+          <div class="t-head">
+            <span class="t-time">12:45 - 12:50</span>
+            <span class="t-title">舉杯答謝 ＆ 服務生上菜</span>
+          </div>
+          <div class="t-desc">雙方主婚人上台共同舉杯（工作人員遞酒）➔ 宴會正式上菜</div>
+        </div>
+      </div>
+
+      <div class="t-item">
+        <div class="t-dot"></div>
+        <div class="t-card">
+          <div class="t-head">
+            <span class="t-time">12:50 - 13:00</span>
+            <span class="t-title">新人主桌用餐</span>
+          </div>
+          <div class="t-desc">新人在主桌稍作休息用餐</div>
+        </div>
+      </div>
+
+      <!-- 換二進服裝 -->
+      <div class="t-item">
+        <div class="t-dot gold"></div>
+        <div class="t-card">
+          <div class="t-head">
+            <span class="t-time gold">13:00 - 13:30</span>
+            <span class="t-title">新娘更衣換造型</span>
+          </div>
+          <div class="t-desc">換穿第二套禮服（龍鳳褂）</div>
+        </div>
+      </div>
+
+      <!-- 第二次進場 -->
+      <div class="t-item">
+        <div class="t-dot accent"></div>
+        <div class="t-card" style="border-color: rgba(244,63,94,0.4);">
+          <div class="t-head">
+            <span class="t-time accent">13:30 - 13:50</span>
+            <span class="t-title">第二次進場（龍鳳褂）</span>
+          </div>
+          <div class="t-desc">播放成長 MV ➔ 新人二進：<strong>逐桌派代表猜拳互動</strong></div>
+        </div>
+      </div>
+
+      <!-- 小活動 -->
+      <div class="t-item">
+        <div class="t-dot accent"></div>
+        <div class="t-card">
+          <div class="t-head">
+            <span class="t-time accent">13:50 - 14:00</span>
+            <span class="t-title">互動小活動：抽現金 💸</span>
+          </div>
+          <div class="t-desc">舞台小活動時間</div>
+        </div>
+      </div>
+
+      <!-- 逐桌敬酒 -->
+      <div class="t-item">
+        <div class="t-dot"></div>
+        <div class="t-card">
+          <div class="t-head">
+            <span class="t-time">14:00 - 14:20</span>
+            <span class="t-title">逐桌敬酒（共 14 桌）</span>
+          </div>
+          <div class="t-desc">新人與雙方主婚人逐桌敬酒致意（播放 Spotify 背景曲）</div>
+        </div>
+      </div>
+
+      <!-- 送客合照 -->
+      <div class="t-item">
+        <div class="t-dot accent"></div>
+        <div class="t-card" style="border-color: rgba(244,63,94,0.4);">
+          <div class="t-head">
+            <span class="t-time accent">14:20 - 15:00</span>
+            <span class="t-title">喜宴圓滿 ＆ 送客合照</span>
+          </div>
+          <div class="t-desc">新人至送客區就位，與全體親友合照留念</div>
         </div>
       </div>
     </div>
 
-    <!-- 現場核對清單（可點擊打勾） -->
+    <!-- 迎娶車隊配置對照表 -->
     <div class="sec-head">
-      <span>🔍 現場重點核對（可直接點擊勾選）</span>
+      <span>🚗 迎娶車隊配置表（去程 ➔ 返程）</span>
+    </div>
+    <div class="fleet-card">
+      <div class="fleet-row">
+        <div class="fleet-car-title">🚘 1 車（禮砲車）</div>
+        <div class="fleet-info">
+          駕駛：大溫 ｜ 砲手：小劉董、<strong>攝影師</strong><br>
+          <span style="color: var(--subtext); font-size: 12px;">（去程 09:00 / 返程 10:20 同乘）</span>
+        </div>
+      </div>
+
+      <div class="fleet-row">
+        <div class="fleet-car-title">🚘 2 車（新娘車）</div>
+        <div class="fleet-info">
+          駕駛：安安<br>
+          去程乘員：淑惠、倫 (新郎)<br>
+          <strong>返程乘員：淑惠、新郎、新娘</strong>
+        </div>
+      </div>
+
+      <div class="fleet-row">
+        <div class="fleet-car-title">🚘 3 車</div>
+        <div class="fleet-info">
+          駕駛：承軒（安同學） ｜ 乘客：美秀（大姨）
+        </div>
+      </div>
+
+      <div class="fleet-row">
+        <div class="fleet-car-title">🚘 4 車</div>
+        <div class="fleet-info">
+          駕駛：宏宏 ｜ 乘客：媒人婆
+        </div>
+      </div>
+
+      <div class="fleet-row">
+        <div class="fleet-car-title">🚘 5 車</div>
+        <div class="fleet-info">
+          駕駛：小吳<br>
+          去程：郭伴郎（1人）<br>
+          <strong>返程：郭伴郎、伴娘(鄧)、伴郎女友</strong>
+        </div>
+      </div>
+
+      <div class="fleet-row">
+        <div class="fleet-car-title">🚘 6 車</div>
+        <div class="fleet-info">
+          駕駛：勵<br>
+          去程：黃伴郎（1人）<br>
+          <strong>返程：黃伴郎、伴娘(徐)</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- 現場重點核對（可直接打勾） -->
+    <div class="sec-head">
+      <span>🔍 現場重點核對（可點擊打勾）</span>
     </div>
     <div class="check-card">
       <div class="c-item" onclick="toggleCheck(this, 1)">
         <div class="c-checkbox"></div>
-        <div><strong>奉茶順序（共 8 位）：</strong><br>1.爸爸 ➔ 2.媽媽 ➔ 3.阿嬤 ➔ 4.二姨 ➔ 5.二姨丈 ➔ 6.大姑姑 ➔ 7.大姑丈 ➔ 8.新郎翊丞</div>
+        <div><strong>08:00 攝影動線：</strong><br>郭伴郎＋攝影師前往男方家拍開妝花絮、迎娶出發（搭乘 1 車禮砲車）。</div>
       </div>
       <div class="c-item" onclick="toggleCheck(this, 2)">
         <div class="c-checkbox"></div>
-        <div><strong>戒指與金飾佩戴：</strong><br>男左手、女右手（中指，紅線綁好）；男方媽媽戴女方、女方媽媽戴男方項鍊。</div>
+        <div><strong>09:30 女方家拜別儀式：</strong><br>闖關遊戲 ➔ 拜別岳父詹順揚、岳母邱莉芬 ➔ 擲扇上車。</div>
       </div>
       <div class="c-item" onclick="toggleCheck(this, 3)">
         <div class="c-checkbox"></div>
-        <div><strong>一進交手儀式：</strong><br>擁抱 ➔ 送捧花 ➔ 爸爸交手牽引 ➔ 上舞台倒香檳塔。</div>
+        <div><strong>10:55 ~ 11:00 入新房流程：</strong><br>開車門：劉宬鋼 ➔ 入新房坐椅子掀頭紗。</div>
       </div>
       <div class="c-item" onclick="toggleCheck(this, 4)">
         <div class="c-checkbox"></div>
-        <div><strong>二進活動道具確認：</strong><br>Ivy 敲敲杯道具、Kahoot 筆電連線、大轉盤 5 位中獎禮。</div>
+        <div><strong>11:30 餐廳迎接放炮：</strong><br>放鞭炮迎接親家：劉彥岐哥。</div>
+      </div>
+      <div class="c-item" onclick="toggleCheck(this, 5)">
+        <div class="c-checkbox"></div>
+        <div><strong>12:30 一進交手特殊動線：</strong><br>新郎＋女方莉芬媽媽走至紅毯中點 ➔ 新娘＋順揚爸爸進場交手 ➔ 浩庭拿婚戒交換。</div>
+      </div>
+      <div class="c-item" onclick="toggleCheck(this, 6)">
+        <div class="c-checkbox"></div>
+        <div><strong>13:30 二進活動：</strong><br>逐桌派代表猜拳進場 ➔ 抽現金活動。</div>
       </div>
     </div>
   </div>
@@ -412,7 +546,7 @@
       const hash = await sha256(pin);
       if (hash === TARGET_HASH) {
         if (document.getElementById("remember-me").checked) {
-          localStorage.setItem("auth_1101", hash);
+          localStorage.setItem("auth_wedding", hash);
         }
         unlock();
       } else {
@@ -428,28 +562,27 @@
     }
 
     function relock() {
-      localStorage.removeItem("auth_1101");
+      localStorage.removeItem("auth_wedding");
       location.reload();
     }
 
     function toggleCheck(el, id) {
       el.classList.toggle("done");
       const done = el.classList.contains("done");
-      localStorage.setItem("check_" + id, done ? "1" : "0");
+      localStorage.setItem("check_w_" + id, done ? "1" : "0");
     }
 
     function loadChecks() {
-      [1, 2, 3, 4].forEach(id => {
-        if (localStorage.getItem("check_" + id) === "1") {
+      [1, 2, 3, 4, 5, 6].forEach(id => {
+        if (localStorage.getItem("check_w_" + id) === "1") {
           const items = document.querySelectorAll(".c-item");
           if (items[id - 1]) items[id - 1].classList.add("done");
         }
       });
     }
 
-    // 自動檢查是否記住登入
     window.onload = function() {
-      if (localStorage.getItem("auth_1101") === TARGET_HASH) {
+      if (localStorage.getItem("auth_wedding") === TARGET_HASH) {
         unlock();
       }
       document.getElementById("pin-code").addEventListener("keyup", function(e) {
